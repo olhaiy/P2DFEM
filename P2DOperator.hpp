@@ -7,6 +7,7 @@
 #include "coefficients/OpenCircuitPotentialCoefficient.hpp"
 #include "coefficients/OverPotentialCoefficient.hpp"
 #include "coefficients/ReactionCurrentCoefficient.hpp"
+#include "RegionalCurrent.hpp"
 
 using namespace mfem;
 

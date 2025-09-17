@@ -128,6 +128,10 @@ void P2DOperator::ImplicitSolve(const real_t dt,
          SetGridFunctionsFromTrueVectors();
          // compute absolute potentials in dedicated member function
          UpdatePotentialEquations();
+         real_t Inp = RegionalCurrent(_x_fespace, 1.0, *_op, *_jex, NE)();
+         real_t Inn = RegionalCurrent(_x_fespace, 1.0, *_op, *_jex, NE)();
+         real_t Ipp = RegionalCurrent(_x_fespace, 1.0, *_op, *_jex, PE)();
+         real_t Ipn = RegionalCurrent(_x_fespace, 1.0, *_op, *_jex, PE)();
          _x.Add(-_dt, dx_dt);
 
          // put _Ap and _bp together
