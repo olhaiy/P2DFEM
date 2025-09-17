@@ -132,6 +132,10 @@ void P2DOperator::ImplicitSolve(const real_t dt,
          real_t Inn = RegionalCurrent(_x_fespace, 1.0, *_op, *_jex, NE)();
          real_t Ipp = RegionalCurrent(_x_fespace, 1.0, *_op, *_jex, PE)();
          real_t Ipn = RegionalCurrent(_x_fespace, 1.0, *_op, *_jex, PE)();
+
+         real_t phi_eo = -2.0 * log(I + sqrt(4.0 * Inp * Inn + I * I)/(2.0 * Inp));
+         real_t phi_po = phi_eo + 2.0 * log(-I + sqrt(4.0 * Ipp * Ipn + I * I)/(2.0 * Ipp));
+
          _x.Add(-_dt, dx_dt);
 
          // put _Ap and _bp together
