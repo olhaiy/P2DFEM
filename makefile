@@ -23,7 +23,7 @@ EQ_SRC_FILES = SolidConcentration.cpp ElectrolyteConcentration.cpp SolidPotentia
 EQ_INC_FILES = SolidConcentration.hpp ElectrolyteConcentration.hpp SolidPotential.hpp ElectrolytePotential.hpp Equation.hpp
 COEFF_INC_FILES = ExchangeCurrentCoefficient.hpp ReactionCurrentCoefficient.hpp OpenCircuitPotentialCoefficient.hpp OverPotentialCoefficient.hpp
 SRC_FILES = $(addprefix equations/, $(EQ_SRC_FILES)) P2DOperator.cpp constants.cpp batree.cpp
-INC_FILES = $(addprefix equations/, $(EQ_INC_FILES)) $(addprefix coefficients/, $(COEFF_INC_FILES)) parameters.hpp P2DOperator.hpp constants.hpp
+INC_FILES = $(addprefix equations/, $(EQ_INC_FILES)) $(addprefix coefficients/, $(COEFF_INC_FILES)) parameters.hpp P2DOperator.hpp constants.hpp RegionalCurrent.hpp
 
 .PHONY: all clean
 
