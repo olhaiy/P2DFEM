@@ -11,6 +11,9 @@ using namespace mfem;
 class SolidPotential : public Equation
 {
    public:
-      using Equation::Equation;
+      SolidPotential(ParFiniteElementSpace &f) : Equation(f)
+      {
+         f.GetEssentialTrueDofs(Array<int>({1, 1}), ess_tdof_list);
+      }
       virtual void Update(const BlockVector &x, const Coefficient &j, const real_t &dt);
 };
