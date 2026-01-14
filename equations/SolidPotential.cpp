@@ -25,6 +25,7 @@ void SolidPotential::Update(const BlockVector &x, const Coefficient &j, const re
    K->AddDomainIntegrator(new DiffusionIntegrator(sigma));
    K->Assemble(0); // keep sparsity pattern of M and K the same
    K->FormSystemMatrix(ess_tdof_list, Kmat);
+   Kmat.Print("KmatSP.txt");
 
    delete Q;
    Q = new ParLinearForm(&fespace);
@@ -32,6 +33,8 @@ void SolidPotential::Update(const BlockVector &x, const Coefficient &j, const re
    Q->Assemble();
    Qvec = std::move(*(Q->ParallelAssemble()));
    Qvec.SetSubVector(ess_tdof_list, 0.0); // do we need this?
+
+   Qvec.Print("QvecSP.txt");
 
    Kmat.Mult(x.GetBlock(SP), b);
    b += Qvec;

@@ -38,6 +38,7 @@ void ElectrolytePotential::Update(const BlockVector &x, const Coefficient &j, co
    K->AddDomainIntegrator(new DiffusionIntegrator(kappa_eff));
    K->Assemble(0); // keep sparsity pattern of M and K the same
    K->FormSystemMatrix(ess_tdof_list, Kmat);
+   Kmat.Print("KmatEP.txt");
 
    delete Q;
    Q = new ParLinearForm(&fespace);
@@ -46,6 +47,8 @@ void ElectrolytePotential::Update(const BlockVector &x, const Coefficient &j, co
    Q->Assemble();
    Qvec = std::move(*(Q->ParallelAssemble()));
    Qvec.SetSubVector(ess_tdof_list, 0.0); // do we need this?
+
+   Qvec.Print("QvecEP.txt");
 
    Kmat.Mult(x.GetBlock(EP), b);
    b.Neg();
