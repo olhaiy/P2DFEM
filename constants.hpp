@@ -102,5 +102,7 @@ namespace constants {
     real_t UN(real_t);
     real_t UP(real_t);
 
+    real_t Kappa(real_t x);
+
     void init_params(std::string m, int order);
 }
