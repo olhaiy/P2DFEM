@@ -273,12 +273,12 @@ void EChemOperator::SetReferencePotential()
          break;
       case P2D:
          real_t Inp = GetElectrodeReactionCurrent(NE,  1.0);
-         real_t Inn = GetElectrodeReactionCurrent(NE,  1.0);
-         real_t Ipp = GetElectrodeReactionCurrent(PE, -1.0);
+         real_t Inn = GetElectrodeReactionCurrent(NE, -1.0);
+         real_t Ipp = GetElectrodeReactionCurrent(PE,  1.0);
          real_t Ipn = GetElectrodeReactionCurrent(PE, -1.0);
 
-         _rp_array[E] = -2.0 * log( I + sqrt(4.0 * Inp * Inn + I * I)/(2.0 * Inp));
-         _rp_array[PE] = 2.0 * log(-I + sqrt(4.0 * Ipp * Ipn + I * I)/(2.0 * Ipp)) + _rp_array[E];
+         _rp_array[E] = -2.0 * T * log(( I + sqrt(4.0 * Inp * Inn + I * I))/(2.0 * Inp));
+         _rp_array[PE] = 2.0 * T * log((-I + sqrt(4.0 * Ipp * Ipn + I * I))/(2.0 * Ipp)) + _rp_array[E];
          break;
    }
 }
@@ -291,7 +291,7 @@ real_t EChemOperator::GetElectrodeReactionCurrent(const Region &r, const int &si
 {
    MFEM_ASSERT(r == NE || r == PE, "Cannot get partial electrode reaction current, only negative (NE) and positive electrodes (PE) are supported.");
 
-   Vector amask({r == NE ? AN : 0., 0., r == PE ? AP : 0.});
+   Vector amask({r == NE ? AN * LNE / NNE * NX : 0., 0., r == PE ? AP * LPE / NPE * NX : 0.});
    PWConstCoefficient a(amask);
    ProductCoefficient ajex(a, *_jex);
    TransformedCoefficient I(&ajex, _op, [=](real_t ajex, real_t op) { return ajex * exp( sign * 0.5 * op ); });
