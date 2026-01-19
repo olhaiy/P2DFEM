@@ -121,6 +121,13 @@ void EChemOperator::ImplicitSolve(const real_t dt,
    {
       dx_dt = 0.;
       ParGridFunction j_gf(_x_fespace);
+      ConstantCoefficient zero(0.);
+
+      IntegrationRule ir(4);
+      for (size_t i = 0; i < ir.GetNPoints(); i++)
+         ir.IntPoint(i).weight = 1.;
+      const IntegrationRule * irs[Geometry::Type::NUM_GEOMETRIES];
+      irs[Geometry::Type::SEGMENT] = &ir;
 
       do
       {
@@ -152,7 +159,7 @@ void EChemOperator::ImplicitSolve(const real_t dt,
          _x.Add(_dt, dx_dt);
          SetGridFunctionsFromTrueVectors();
       }
-      while (j_gf.ComputeL2Error(*_j) > _threshold);
+      while (j_gf.ComputeL2Error(*_j, irs) > _threshold * j_gf.ComputeL2Error(zero, irs));
 
       // restore solution true dof vector
       _x.Add(-_dt, dx_dt);
