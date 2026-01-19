@@ -121,7 +121,9 @@ void EChemOperator::ImplicitSolve(const real_t dt,
    if (M == P2D)
    {
       dx_dt = 0.;
-      ParGridFunction j_gf(_x_fespace);
+      L2_FECollection fe_coll(_x_fespace->FEColl()->GetOrder(), /*dim*/ 1);
+      ParFiniteElementSpace l2_fespace(_x_fespace->GetParMesh(), &fe_coll);
+      ParGridFunction j_gf(&l2_fespace);
       ConstantCoefficient zero(0.);
 
       IntegrationRule ir(4);
