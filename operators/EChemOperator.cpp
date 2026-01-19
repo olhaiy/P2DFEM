@@ -126,9 +126,10 @@ void EChemOperator::ImplicitSolve(const real_t dt,
       ParGridFunction j_gf(&l2_fespace);
       ConstantCoefficient zero(0.);
 
-      IntegrationRule ir(4);
+      IntegrationRule ir = IntegrationRules().Get(Geometry::Type::SEGMENT, 7);
       for (size_t i = 0; i < ir.GetNPoints(); i++)
       {
+         std::cout << ir.IntPoint(i).weight << std::endl;
          ir.IntPoint(i).weight = 1.;
          std::cout << ir.IntPoint(i).x << std::endl;
       }
