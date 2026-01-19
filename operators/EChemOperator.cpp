@@ -128,7 +128,10 @@ void EChemOperator::ImplicitSolve(const real_t dt,
 
       IntegrationRule ir(4);
       for (size_t i = 0; i < ir.GetNPoints(); i++)
+      {
          ir.IntPoint(i).weight = 1.;
+         std::cout << ir.IntPoint(i).x << std::endl;
+      }
       const IntegrationRule * irs[Geometry::Type::NUM_GEOMETRIES];
       irs[Geometry::Type::SEGMENT] = &ir;
 
