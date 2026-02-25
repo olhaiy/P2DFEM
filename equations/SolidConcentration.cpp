@@ -30,7 +30,6 @@ void SolidConcentration::Update(const BlockVector &x, const Coefficient &j)
    Q->AddBoundaryIntegrator(new BoundaryLFIntegrator(jr2), const_cast<mfem::Array<int>&>(surface_bdr));
    Q->Assemble();
    Qvec = std::move(*(Q->ParallelAssemble()));
-   Qvec.SetSubVector(ess_tdof_list, 0.0); // do we need this?
 
    Kmat.Mult(x.GetBlock(SC + particle_id), b);
    b.Neg();

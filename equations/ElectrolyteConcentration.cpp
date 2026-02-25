@@ -48,7 +48,6 @@ void ElectrolyteConcentration::Update(const BlockVector &x, const GridFunctionCo
    Q->AddDomainIntegrator(new DomainLFIntegrator(source));
    Q->Assemble();
    Qvec = std::move(*(Q->ParallelAssemble()));
-   Qvec.SetSubVector(ess_tdof_list, 0.0); // do we need this?
 
    Kmat.Mult(x.GetBlock(EC), b);
    b.Neg();
