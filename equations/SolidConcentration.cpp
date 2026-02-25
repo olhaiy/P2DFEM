@@ -29,11 +29,13 @@ void SolidConcentration::Update(const BlockVector &x, const Coefficient &j)
    Q = new ParLinearForm(&fespace);
    Q->AddBoundaryIntegrator(new BoundaryLFIntegrator(jr2), const_cast<mfem::Array<int>&>(surface_bdr));
    Q->Assemble();
-   Qvec = std::move(*(Q->ParallelAssemble()));
+
+   delete Qvec;
+   Qvec = Q->ParallelAssemble();
 
    Kmat.Mult(x.GetBlock(SC + particle_id), b);
    b.Neg();
-   b += Qvec;
+   b += *Qvec;
 }
 
 real_t SolidConcentration::SurfaceConcentration(const BlockVector &x)
