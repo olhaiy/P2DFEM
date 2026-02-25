@@ -530,10 +530,11 @@ void EChemOperator::GetParticleDofs(Array<int> & my_particle_dofs, Array<Region>
       Region r = UNKNOWN;
       if (ltdof != -1)
          for (unsigned i = 0; i < n_gtdofs * Mpi::WorldSize(); i++)
-            if (gtdof == all_gtdofs[i] && (r = all_regions[i]) != SEP && my_particle_dofs.Find(d) == -1)
+            if (gtdof == all_gtdofs[i] && (r = all_regions[i]) != SEP)
             {
                my_particle_dofs.Append(d);
                my_particle_regions.Append(r);
+               break;
             }
    }
    my_particle_regions.SetSize(n_gtdofs, UNKNOWN);
