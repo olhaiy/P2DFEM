@@ -119,7 +119,7 @@ EChemOperator::EChemOperator(ParFiniteElementSpace * &x_h1space, Array<ParFinite
 
    if (P2D)
    {
-      // Construct space for discontinuous functions like the reaction current j (I'm leaking the collection)
+      // Construct space for discontinuous functions like the reaction current j
       _x_l2space = new ParFiniteElementSpace(_x_h1space->GetParMesh(),
                    new L2_FECollection(_scl_ir.GetNPoints() - 1, 1));
 
