@@ -47,14 +47,13 @@ const real_t R = 8.314;       // Universal gas constant, J/(mol*K)
 const real_t T_ref = 298.;    // Reference temperature, K
 
 // Scalings
-const real_t t0 = 1.0;  // Time scale.
-const real_t r0 = 1e-6; // Length scale (particle)
-const real_t L = negative_electrode_thickness + separator_thickness +
-                 positive_electrode_thickness; // Length scale (cell)
+const real_t t0 = 1.0;         // Time scale.
+const real_t r0 = 1e-6;        // Length scale (particle)
+const real_t L = ln + ls + lp; // Length scale (cell)
 
-const real_t LNE = negative_electrode_thickness / L; // Length of Negative Electrode
-const real_t LSEP = separator_thickness / L;         // Length of Separator
-const real_t LPE = positive_electrode_thickness / L; // Length of Positive Electrode
+const real_t LNE = ln / L;  // Length of Negative Electrode
+const real_t LSEP = ls / L; // Length of Separator
+const real_t LPE = lp / L;  // Length of Positive Electrode
 
 const real_t a0 = 1.0 / r0;
 
