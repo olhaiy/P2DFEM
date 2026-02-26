@@ -1,0 +1,23 @@
+name: Style Checks
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  Whitespace:
+    name: Trailing whitespace
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout batree
+        uses: actions/checkout@v6
+      - name: Check codebase
+        uses: harupy/find-trailing-whitespace@v1.0
+  Format:
+    name: Clang format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout batree
+        uses: actions/checkout@v6
+      - name: Format codebase
+        uses: RafikFarhad/clang-format-github-action@v6.0.1
+        with:
+          style: file
