@@ -1,6 +1,6 @@
 # Batree: An MFEM-based SPM, SPMe and P2D solver
 
-_Nuno Nobre, Karthikeyan Chockalingam and Daniel Ward, STFC Hartree Centre_
+_Nuno Nobre, Karthikeyan Chockalingam, Daniel Ward and Olha Yaman, STFC Hartree Centre_
 
 [![Integration Tests](https://github.com/karthichockalingam/P2DFEM/actions/workflows/tests.yml/badge.svg)](https://github.com/karthichockalingam/P2DFEM/actions/workflows/tests.yml)
 

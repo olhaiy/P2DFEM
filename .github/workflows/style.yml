@@ -21,3 +21,4 @@ jobs:
         uses: RafikFarhad/clang-format-github-action@v6.0.1
         with:
           style: file
+          excludes: docs/details.md
